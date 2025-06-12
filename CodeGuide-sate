@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeGuide</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+    }header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #252526;
+}
+
+#search {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+
+select {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.card {
+  background: #2d2d30;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #0005;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card img {
+  width: 100px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CodeGuide</h1>
+    <select id="language-selector">
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+    </select>
+    <input type="text" id="search" placeholder="Search platforms..." />
+  </header>  <main id="platform-list">
+    <!-- Cards serão inseridos aqui -->
+  </main>  <script>
+    const platforms = [
+      {
+        name: "GitHub",
+        url: "https://github.com/",
+        tutorial: "https://docs.github.com/en",
+        image: "https://cdn-icons-png.flaticon.com/512/25/25231.png"
+      },
+      {
+        name: "Replit",
+        url: "https://replit.com/",
+        tutorial: "https://docs.replit.com/",
+        image: "https://upload.wikimedia.org/wikipedia/commons/b/b2/Repl.it_logo.svg"
+      },
+      {
+        name: "CodePen",
+        url: "https://codepen.io/",
+        tutorial: "https://blog.codepen.io/documentation/",
+        image: "https://cdn.worldvectorlogo.com/logos/codepen-icon.svg"
+      },
+      {
+        name: "JSFiddle",
+        url: "https://jsfiddle.net/",
+        tutorial: "https://docs.jsfiddle.net/",
+        image: "https://assets.codepen.io/243324/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1586182073&width=512"
+      }
+      // Você pode adicionar mais aqui
+    ];
+
+    const languageData = {
+      en: {
+        search_placeholder: "Search platforms...",
+        access: "Access Platform",
+        tutorial: "View Tutorial"
+      },
+      pt: {
+        search_placeholder: "Pesquisar plataformas...",
+        access: "Acessar Plataforma",
+        tutorial: "Ver Tutorial"
+      }
+    };
+
+    const langSelector = document.getElementById("language-selector");
+    const platformList = document.getElementById("platform-list");
+    const searchInput = document.getElementById("search");
+    let currentLang = "en";
+
+    function renderPlatforms(filter = "") {
+      platformList.innerHTML = "";
+      platforms
+        .filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(p => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}" />
+            <h2>${p.name}</h2>
+            <a href="${p.url}" target="_blank">${languageData[currentLang].access}</a><br>
+            <a href="${p.tutorial}" target="_blank">${languageData[currentLang].tutorial}</a>
+          `;
+          platformList
