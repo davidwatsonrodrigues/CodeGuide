@@ -1,0 +1,12 @@
+{
+  "en": {
+    "search_placeholder": "Search platforms...",
+    "access": "Access Platform",
+    "tutorial": "View Tutorial"
+  },
+  "pt": {
+    "search_placeholder": "Pesquisar plataformas...",
+    "access": "Acessar Plataforma",
+    "tutorial": "Ver Tutorial"
+  }
+}
